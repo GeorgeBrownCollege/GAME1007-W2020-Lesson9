@@ -5,6 +5,7 @@
 
 class Sprite
 {
+private:
 	SDL_Texture* pSpriteTex = nullptr;
 	SDL_Rect src;
 

@@ -8,6 +8,7 @@
 
 class Game
 {
+private:
 	// For framerate
 	int targetFramerate = 30;
 	int frameDelayMs = 1000/targetFramerate;
@@ -23,12 +24,14 @@ class Game
 	SDL_Window* pWindow = nullptr;
 	SDL_Renderer* pRenderer = nullptr;
 
+	// Mouse position
+	SDL_Rect mousePosition;
+
 	// to know when to quit
 	bool isRunning;
 
 public:
 	Sprite ship;
-	Sprite background;
 
 	Game();
 	Game(const char* windowName, int windowSizeX, int windowSizeY);
@@ -37,7 +40,7 @@ public:
 	// start the game loop
 	void run();
 
-	// game loop
+	// input handling
 	void input();
 
 	// update your game world in here!
@@ -49,7 +52,7 @@ public:
 	// called at the end of the loop
 	void waitForNextFrame();
 
-	// stop running the gane
+	// stop running the game
 	void quit();
 
 	// clean memory related to the Game object.

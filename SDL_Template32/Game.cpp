@@ -35,9 +35,7 @@ Game::~Game()
 void Game::run()
 {
 	ship = Sprite(pRenderer, "ship.png", 140, 140);
-	background = Sprite(pRenderer, "ship.png", 800, 600);
-	background.setPosition(0,0);
-	ship.setPosition(0, 0);
+	ship.setPosition(400, 300);
 
 
 
@@ -60,35 +58,42 @@ void Game::run()
 
 void Game::input()
 {
+	auto wheel = 0;
+	SDL_Event event;
+	while(SDL_PollEvent(&event))
+	{
+		switch(event.type)
+		{
+			case SDL_QUIT:
+				quit();
+				break;
+			case SDL_MOUSEMOTION:
+				mousePosition.x = event.motion.x;
+				mousePosition.y = event.motion.y;
+				break;
+		}
+		
+	}
 }
 
 void Game::update()
 {
 	// transforming ship based on sinosoidal function of time
 	// for fun!
-	ship.velX = sin(gameTime) * 100;
+	/*ship.velX = sin(gameTime) * 100;
 	ship.velY = sin(gameTime) * 100;
 
 	ship.dst.x = ship.dst.x + ship.velX * deltaTime;
-	ship.dst.y = ship.dst.y + ship.velY * deltaTime;
+	ship.dst.y = ship.dst.y + ship.velY * deltaTime;*/
 
-	//ship.setPosition(400, sin((float)SDL_GetTicks() / 1000.f) * 200 + 200);
-	ship.setSize(sin(gameTime * 100) + 100, sin(gameTime) * 100 + 100);
-
-	// automatically quit after 30 seconds just as an example to show Qame.quit()
-	if (gameTime > 30)
-	{
-		std::cout << "automatically quitting -- 30 seconds have passed" << std::endl;
-		quit();
-	}
+	ship.setPosition(mousePosition.x, mousePosition.y);
 }
 
 void Game::draw()
 {
-	SDL_SetRenderDrawColor(pRenderer, 255, 205, 90, 255);
+	SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
 	SDL_RenderClear(pRenderer);
 	
-	background.draw(pRenderer);
 	ship.draw(pRenderer);
 	
 	SDL_RenderPresent(pRenderer);
