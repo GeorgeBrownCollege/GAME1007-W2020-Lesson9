@@ -27,6 +27,10 @@ private:
 	// Mouse position
 	SDL_Rect mousePosition;
 
+	// ship movement functions
+	void moveShip();
+	void checkBounds();
+
 	// to know when to quit
 	bool isRunning;
 

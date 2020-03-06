@@ -34,6 +34,11 @@ void Sprite::setPosition(int x, int y)
 	dst.y = y - dst.h * 0.5f;
 }
 
+SDL_Rect Sprite::getPosition()
+{
+	return dst;
+}
+
 void Sprite::setSize(int x, int y)
 {
 	dst.w = x;

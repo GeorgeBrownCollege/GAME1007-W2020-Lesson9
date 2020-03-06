@@ -24,6 +24,9 @@ public:
 	~Sprite();
 
 	void setPosition(int x, int y);
+	SDL_Rect getPosition();
+
+	
 	void setSize(int x, int y);
 	void draw(SDL_Renderer* renderer);
 

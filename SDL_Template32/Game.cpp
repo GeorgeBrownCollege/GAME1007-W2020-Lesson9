@@ -2,6 +2,28 @@
 #include <iostream>
 #include <SDL_image.h>
 
+void Game::moveShip()
+{
+	ship.setPosition(mousePosition.x, 500);
+}
+
+void Game::checkBounds()
+{
+	// check right boundary
+	if(ship.getPosition().x > 800 - ship.getPosition().w)
+	{
+		
+		ship.setPosition(800 - ship.getPosition().w * 0.5, 500);
+	}
+
+	// check left boundary
+	if (ship.getPosition().x < 0)
+	{
+
+		ship.setPosition(ship.getPosition().w * 0.5, 500);
+	}
+}
+
 Game::Game()
 {
 }
@@ -34,7 +56,7 @@ Game::~Game()
 
 void Game::run()
 {
-	ship = Sprite(pRenderer, "ship.png", 140, 140);
+	ship = Sprite(pRenderer, "ship.png", 73, 155);
 	ship.setPosition(400, 300);
 
 
@@ -64,12 +86,41 @@ void Game::input()
 	{
 		switch(event.type)
 		{
+			// when the x button is clicked on the window
 			case SDL_QUIT:
 				quit();
 				break;
+			// when the mouse is moved
 			case SDL_MOUSEMOTION:
 				mousePosition.x = event.motion.x;
 				mousePosition.y = event.motion.y;
+				break;
+			case SDL_KEYDOWN:
+				switch(event.key.keysym.sym)
+				{
+					// press on the esc key to quit
+					case SDLK_ESCAPE:
+						quit();
+					break;
+					case SDLK_w:
+						// move up
+						std::cout << "move up" << std::endl;
+						break;
+					case SDLK_a:
+						// move left
+						std::cout << "move left" << std::endl;
+						break;
+					case SDLK_s:
+						// move down
+						std::cout << "move down" << std::endl;
+						break;
+					case SDLK_d:
+						// move right
+						std::cout << "move right" << std::endl;
+						break;
+				}
+				break;
+			default:
 				break;
 		}
 		
@@ -78,15 +129,9 @@ void Game::input()
 
 void Game::update()
 {
-	// transforming ship based on sinosoidal function of time
-	// for fun!
-	/*ship.velX = sin(gameTime) * 100;
-	ship.velY = sin(gameTime) * 100;
-
-	ship.dst.x = ship.dst.x + ship.velX * deltaTime;
-	ship.dst.y = ship.dst.y + ship.velY * deltaTime;*/
-
-	ship.setPosition(mousePosition.x, mousePosition.y);
+	moveShip();
+	checkBounds();
+	
 }
 
 void Game::draw()
