@@ -10,7 +10,7 @@ class Game
 {
 private:
 	// For framerate
-	int targetFramerate = 30;
+	int targetFramerate = 60;
 	int frameDelayMs = 1000/targetFramerate;
 	Uint32 frameEndTimeMs;
 	Uint32 lastFrameStartTimeMs;

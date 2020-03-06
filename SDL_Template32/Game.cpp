@@ -20,7 +20,7 @@ void Game::checkBounds()
 	if (ship.getPosition().x < 0)
 	{
 
-		ship.setPosition(ship.getPosition().w * 0.5, 500);
+		ship.setPosition(ship.getPosition().w * 0.5, 420);
 	}
 }
 
@@ -57,7 +57,7 @@ Game::~Game()
 void Game::run()
 {
 	ship = Sprite(pRenderer, "ship.png", 73, 155);
-	ship.setPosition(400, 300);
+	ship.setPosition(364, 420);
 
 
 
@@ -109,6 +109,7 @@ void Game::input()
 					case SDLK_a:
 						// move left
 						std::cout << "move left" << std::endl;
+						ship.setPosition(ship.getPosition().x - 20, 420);
 						break;
 					case SDLK_s:
 						// move down
@@ -117,6 +118,7 @@ void Game::input()
 					case SDLK_d:
 						// move right
 						std::cout << "move right" << std::endl;
+						ship.setPosition(ship.getPosition().x + 20, 420);
 						break;
 				}
 				break;
@@ -129,7 +131,8 @@ void Game::input()
 
 void Game::update()
 {
-	moveShip();
+	// moves ship with mouse movement
+	//moveShip();
 	checkBounds();
 	
 }

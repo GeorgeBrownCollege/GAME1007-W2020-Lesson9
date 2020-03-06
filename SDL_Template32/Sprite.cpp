@@ -30,8 +30,8 @@ void Sprite::cleanup()
 
 void Sprite::setPosition(int x, int y)
 {
-	dst.x = x - dst.w * 0.5f;
-	dst.y = y - dst.h * 0.5f;
+	dst.x = x;// -dst.w * 0.5f;
+	dst.y = y;// -dst.h * 0.5f;
 }
 
 SDL_Rect Sprite::getPosition()
